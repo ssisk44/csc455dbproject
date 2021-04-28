@@ -1,7 +1,6 @@
 from alpha_vantage.timeseries import TimeSeries
 import pandas as pd
 import mysql.connector
-import pymysql
 
 
 API_key = 'GH1BFTXNR1TJHCBQ'
