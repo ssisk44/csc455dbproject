@@ -14,6 +14,7 @@ def connect():
     mydb = mysql.connector.connect(
         host="satoshi.cis.uncw.edu",
         user="aa3122",
-        password="sDDOa4YpP"
+        password="sDDOa4YpP",
+        databse="CSC455SP21Finance"
     )
 connect()
