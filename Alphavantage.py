@@ -15,6 +15,6 @@ def connect():
         host="satoshi.cis.uncw.edu",
         user="aa3122",
         password="sDDOa4YpP",
-        databse="CSC455SP21Finance"
+        database="CSC455SP21Finance"
     )
 connect()
