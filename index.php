@@ -15,17 +15,24 @@
   <body>
     <h2>PriceID LowPrice, and HighPrice</h2>
     <?php
-      $sql = "SELECT * FROM priceRecord;";
-      $result = mysqli_query($conn, $sql);
-      $resultCheck = mysqli_num_rows($result);
-
-      if ($resultCheck > 0) {
-	echo "<table><tr><th>PriceId</th><th>LowPrice</th><th>HighPrice</th></tr>";
-        while ($row = mysqli_fetch_assoc($result)) {
-          echo "<tr><td>" . $row['priceId'] . "</td><td>" . $row['lowPrice']  . "</td><td>" . $row['highPrice'] . "</tr>";
+      
+      $sqlmin = 'SELECT MIN(endPrice) FROM priceRecord;';
+      $resultmin = $conn->query($sqlmin);
+      
+      $sqlmax = "SELECT MAX(endPrice) FROM priceRecord;;";
+      $resultmax = $conn->query($sqlmax);
+      
+      $resultslabelarray = array('Min','Max');
+      $resultsarray = array($sqlmax,$sqlmin);
+      
+      $arrayindex = 0;
+      echo "<table><tr><th>Query</th><th>SQLResponse</th></tr>";
+      foreach ($resultsarray as &$value) {
+        echo "<tr><td>" . $resultslabelarray[$arrayindex] . "</td><td>" . $value . "</tr>";
+        $arrayindex += 1;
+      
+	  echo "</table>";
       }
-	echo "</table>";
-}
     ?>
   </body>
 </html>
