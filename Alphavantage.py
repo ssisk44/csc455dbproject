@@ -91,7 +91,7 @@ def intraday_populator(ticker, company_name, currency, interval):
         password="UiYZP14iY",
         database="CSC455SP21Finance"
     )
-    ts = TimeSeries(key=API_key, output_format='csv')
+    ts = TimeSeries(key=API_key)
     cursor = mydb.cursor(cursor_class=MySQLCursorPrepared)
     num_minutes = interval[:-3]  # Grabbing number of minutes in string form
 
