@@ -28,11 +28,14 @@ GROUP BY time.stockTicker;";
       }
 	echo "</table>";
 }?>
-<h2>Maximum Price For Each Stock</h2>
+
+
+<h2>Maximum Price For MSFT Stock</h2>
 <?php
       $sql2 = "SELECT MAX(priceRecord.endPrice), time.stockTicker, stock.companyName
 FROM ((priceRecord INNER JOIN time ON priceRecord.priceId = time.priceId) INNER JOIN stock ON time.stockTicker = stock.stockTicker)
-GROUP BY time.stockTicker;";
+GROUP BY time.stockTicker
+HAVING time.stockTicker LIKE 'MSFT';";
       $result2 = mysqli_query($conn, $sql2);
       $resultCheck2 = mysqli_num_rows($result2);
 
@@ -45,5 +48,5 @@ GROUP BY time.stockTicker;";
 }
 
     ?>
-  </body>
+    </body>
 </html>
