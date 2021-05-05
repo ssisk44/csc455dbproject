@@ -45,8 +45,22 @@ HAVING time.stockTicker LIKE 'MSFT';";
           echo "<tr><td>" . $row['MAX(priceRecord.endPrice)'] . "</td><td>" . $row['stockTicker']  . "</td><td>" . $row['companyName'] . "</tr>";
       }
 	echo "</table>";
-}
+}?>
 
-    ?>
+<h2>Above Average Stock Prices For Microsoft</h2>
+<?php
+  $sql3 = "SELECT priceRecord.endPrice, time.stockTicker
+FROM (priceRecord INNER JOIN time ON priceRecord.priceId = time.priceId)
+WHERE endPrice > (SELECT AVG(endPrice) FROM priceRecord) AND time.stockTicker = 'MSFT';";
+  $result3 = mysqli_query($conn, $sql3);
+  $resultCheck3 = mysqli_num_rows($result3);
+
+  if ($resultCheck3 > 0) {
+echo "<table><tr><th>Stock Ticker</th><th>Stock Price</th></tr>";
+    while ($row = mysqli_fetch_assoc($result3)) {
+      echo "<tr><td>" . $row['stockTicker'] . "</td><td>" . $row['endPrice'] . "</tr>";
+  }
+echo "</table>";
+}?>
     </body>
 </html>
