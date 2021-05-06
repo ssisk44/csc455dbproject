@@ -1,16 +1,19 @@
+<?php
+    include_once 'includes/dbh.inc.php';
+?>
+<!DOCTYPE html>
 <html>
+<head>
+        <title>Time Interval</title>
+    </head>
+
 <body>
   <?php
-  if (isset($_POST["startTime"])) {
-       $startDate = $_POST["startTime"];
-       $endDate = $_POST["endTime"];
-       $interval = $_POST["interval"];
-       $ticker = $_POST["ticker"];
-       $stmt = "CALL getInterval(\"$startDate\", \"$endDate\", $interval, \"$ticker\");";
+       $stmt = "CALL getInterval('2021-04-28 00:00','2021-05-28 22:59', 15, 'MSFT');";
        $result2 = mysqli_query($conn, $stmt);
        $resultCheck2 = mysqli_num_rows($result2);
        if ($resultCheck2 > 0) {
-           echo "<table> <tr>
+           echo "<table><tr>
                    <th>stockTicker</th>
                    <th>timeIntervalStart</th>
                    <th>timeIntervalEnd</th>
@@ -21,20 +24,18 @@
                    <th>lowPrice</th>
                    <th>highPrice</th>
                 </tr>";
-           while ($row = $result2->mysqli_fetch_assoc()) {
-               echo "<table> <tr>
-                   <th>" . $row["stockTicker"] . "</th>
-                   <th>" . $row["timeIntervalStart"] . "</th>
-                   <th>" . $row["timeIntervalEnd"] . "</th>
-                   <th>" . $row["priceId"] . "</th>
-                   <th>" . $row["startPrice"] . "</th>
-                   <th>" . $row["endPrice"] . "</th>
-                   <th>" . $row["volumeTraded"] . "</th>
-                   <th>" . $row["lowPrice"] . "</th>
-                   <th>" . $row["highPrice"] . "</th>
+           while ($row = mysqli_fetch_assoc($result2)) {echo "<tr>
+                   <td>" . $row['stockTicker'] . "</td>
+                   <td>" . $row['timeIntervalStart'] . "</td>
+                   <td>" . $row['timeIntervalEnd'] . "</td>
+                   <td>" . $row['priceId'] . "</td>
+                   <td>" . $row['startPrice'] . "</td>
+                   <td>" . $row['endPrice'] . "</td>
+                   <td>" . $row['volumeTraded'] . "</td>
+                   <td>" . $row['lowPrice'] . "</td>
+                   <td>" . $row['highPrice'] . "</td>
                 </tr>";
            }
-       }
        echo "</table>";
   }
   ?>
