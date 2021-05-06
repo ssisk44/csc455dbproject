@@ -50,7 +50,7 @@ HAVING time.stockTicker LIKE 'MSFT';";
 <?php
   $sql3 = "SELECT priceRecord.endPrice, time.stockTicker, AVG(priceRecord.endPrice) as test
 FROM (priceRecord INNER JOIN time ON priceRecord.priceId = time.priceId)
-WHERE time.stockTicker = 'MSFT' AND endPrice > (SELECT test FROM priceRecord);";
+WHERE time.stockTicker = 'AMZN' AND endPrice > (SELECT test FROM priceRecord);";
   $result3 = mysqli_query($conn, $sql3);
   $resultCheck3 = mysqli_num_rows($result3);
 
